@@ -9,17 +9,21 @@
 Крок 1.1: Перероблюю функцію ```handleButtonClick()```.
 ```java
 private void handleButtonClick(){
+    // Перевірка значення clickCounter для визначення подальших дій
     if(clickCounter == 0){
-        setButtonStyle(button, Color.BLACK, Color.WHITE, "Don't click on me anymore!");
-        showToast("Hey, why you clicked me?!", Toast.LENGTH_SHORT);
+        // Якщо це перше натискання, змінити стиль кнопки, показати повідомлення toast, приховати hackWriter та збільшити clickCounter
+        setButtonStyle(button, Color.BLACK, Color.WHITE, "Не натискайте більше на мене!");
+        showToast("Привіт, чому ти натиснув на мене?!", Toast.LENGTH_SHORT);
         hackWriter.setVisibility(View.GONE);
         clickCounter++;
 
     }else if(clickCounter == 1){
-        setButtonStyle(button, Color.WHITE, Color.BLACK, "Dude, you're not serious");
+        // Якщо це друге натискання, змінити стиль кнопки та збільшити clickCounter
+        setButtonStyle(button, Color.WHITE, Color.BLACK, "Ти серйозно?");
         clickCounter++;
     }else if(clickCounter == 2){
-        showToast("I'm done with you!", Toast.LENGTH_LONG);
+        // Якщо це третє натискання, показати довге повідомлення toast та завершити діяльність
+        showToast("Я з вами закінчив!", Toast.LENGTH_LONG);
         finish();
     }
 }
@@ -30,14 +34,20 @@ private void handleButtonClick(){
 protected void onStart() {
     super.onStart();
 
+    // Знаходження елементу TextView за його ідентифікатором
     hackWriter = findViewById(R.id.hackWriter);
+    
+    // Генерування випадкового індексу для вибору жарту з масиву
     int randomIndex = (int) (Math.random() * joke.length);
 
+    // Встановлення тексту у hackWriter з випадковим жартом(там немає жартів)
     hackWriter.setText(joke[randomIndex]);
 
+    // Налаштування обробника кліків кнопки
     button.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            // Виклик методу handleButtonClick() при кліку на кнопку
             handleButtonClick();
         }
     });
@@ -48,7 +58,9 @@ protected void onStart() {
 @Override
 protected void onPause() {
     super.onPause();
-    showToast("Shut me down!", Toast.LENGTH_SHORT);
+    
+    // Показ короткого повідомлення toast при виклику onPause()
+    showToast("Закрийте мене!", Toast.LENGTH_SHORT);
 }
 ```
 
@@ -57,8 +69,11 @@ protected void onPause() {
 @Override
 protected void onRestart() {
     super.onRestart();
+    
+    // Перевірка, чи були зроблені натискання на кнопку перед виходом з активності
     if (clickCounter > 0) {
-        setButtonStyle(button, Color.BLACK, Color.WHITE, "Why did you come back?");
+        // Якщо так, змінити стиль кнопки, приховати TextView і скинути лічильник натискань
+        setButtonStyle(button, Color.BLACK, Color.WHITE, "Чому ти повернувся?");
         hackWriter.setVisibility(View.GONE);
         clickCounter = 0;
     }
