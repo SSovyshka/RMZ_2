@@ -1,30 +1,28 @@
 # Розробка мобільних застосунків
 
-# Практична робота №1.2 - Створення простого Android додатку
+# Практична робота №1.3 - Робота із активностями в ОС Android.
 
 ### Опис проекту
-У цій практичній роботі створено простий Android додаток з однією кнопкою, яка змінює свій стиль та виконує певні дії при натисканні.
+Отримати досвід роботи із процесамм відстеження станів активності.
 
-### Крок 1: Створення проекту
-Проект створено з використанням API26 для Android 8 "Oreo". Встановлені відповідні налаштування для підтримки цієї версії Android.
-<p>
-  <img src="screenshots/1.png" width="600px">
-</p>
-
-### Крок 2: Налаштування інтерфейсу застосунку
-Додано кнопку та вирівняно її по центру екрану. Змінено параметри кнопки в XML файлі для зміни її вигляду.
-<p>
-  <img src="screenshots/2.png" width="700px">
-</p>
-
-- В файлі ``` \app\src\main\res\layout\activity_main.xml ```, змінюю такі параметри
-  
+### Крок 1: Додавання коду до попереднього проекту.
+Перероблюю код зміни стилю кнопоки.
 ```java
-android:id="@+id/click_me_button" -- Змінюю id об'єкту
-android:layout_width="200dp" -- Змінюю ширину об'єкту
-android:layout_height="53dp" -- Змінюю висоту об'єкту
-android:text="Don't click me!" -- Змінюю текст об'єкту
-tools:ignore="HardcodedText" -- Додаю параметр для ігнорування "хардкод-тексту"
+private void handleButtonClick(){
+    if(clickCounter == 0){
+        setButtonStyle(button, Color.BLACK, Color.WHITE, "Don't click on me anymore!");
+        showToast("Hey, why you clicked me?!", Toast.LENGTH_SHORT);
+        hackWriter.setVisibility(View.GONE);
+        clickCounter++;
+
+    }else if(clickCounter == 1){
+        setButtonStyle(button, Color.WHITE, Color.BLACK, "Dude, you're not serious");
+        clickCounter++;
+    }else if(clickCounter == 2){
+        showToast("I'm done with you!", Toast.LENGTH_LONG);
+        finish();
+    }
+}
 ```
 
 <p>
