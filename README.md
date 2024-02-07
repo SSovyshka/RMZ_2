@@ -83,9 +83,9 @@ protected void onRestart() {
 
 ### Крок 3: Робочий додаток
 Додаток працює як очікувано, змінюючи стиль кнопки при паузі додатку.
-<div width = "400px">
+
 https://github.com/SSovyshka/RMZ_2/assets/91850335/6ecd9957-9daf-4fb1-b81a-bce1aa624063
-</div>
+
 
 
 
