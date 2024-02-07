@@ -6,7 +6,7 @@
 Отримати досвід роботи із процесамм відстеження станів активності.
 
 ### Крок 1: Додавання коду до попереднього проекту.
-Перероблюю функцію ```handleButtonClick()```.
+Крок 1.1: Перероблюю функцію ```handleButtonClick()```.
 ```java
 private void handleButtonClick(){
     if(clickCounter == 0){
@@ -24,7 +24,7 @@ private void handleButtonClick(){
     }
 }
 ```
-Додаю метод ```onStart()```
+Крок 1.2: Додаю метод ```onStart()```
 ```java
 @Override
 protected void onStart() {
@@ -43,7 +43,7 @@ protected void onStart() {
     });
 }
 ```
-Додаю метод ```onPause()```
+Крок 1.3: Додаю метод ```onPause()```
 ```java
 @Override
 protected void onPause() {
@@ -52,7 +52,7 @@ protected void onPause() {
 }
 ```
 
-Додаю метод ```onRestart()```
+Крок 1.4: Додаю метод ```onRestart()```
 ```java
 @Override
 protected void onRestart() {
@@ -65,76 +65,21 @@ protected void onRestart() {
 }
 ```
 
+### Крок 2: Додавання TextView
+-В файлі \app\src\main\res\layout\activity_main.xml, додаю новый View
 
-
-### Крок 3: Написання коду
-Крок 3.1: Створення змінних
-```java
-private Button button; // Змінна для кнопки
-private boolean styleFlag = false; // Змінна-перемикач для стилю кнопки
-private boolean exitFlag = false; // Змінна для виходу з додатку
+```
+<TextView
+    android:id="@+id/hackWriter"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
+    android:text=""
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 ```
 
-Крок 3.2: Метод `onCreate()`
-
-```java
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    button = findViewById(R.id.click_me_button); // Находжу кнопку за заданим id раніше
-    button.setOnClickListener(new View.OnClickListener() {
-        // Встановлюємо слухач подій натискання на кнопку
-        @Override
-        public void onClick(View v) {
-            // При натисканні на кнопку викликається метод handleButtonClick()
-            handleButtonClick();
-        }
-    });
-}
-```
-
-Крок 3.3: `Функція handleButtonClick()`
-```java
-private void handleButtonClick() {
-    // Перевіряємо, чи встановлено прапорець стилю
-    if (!styleFlag) {
-        // Якщо встановлено прапорець виходу
-        if (exitFlag) {
-            showToast("Я з вами покінчив!", Toast.LENGTH_LONG);
-            finish();  // Завершуємо активність (Activity)
-        }
-
-        // Встановлюємо стиль для кнопки
-        setButtonStyle(button, Color.BLACK, Color.WHITE, "Більше не натискай на мене!");
-
-        showToast("Привіт, чому ти на мене натискав?!", Toast.LENGTH_SHORT);
-        styleFlag = !styleFlag;  // Змінюємо значення прапорця стилю
-    }
-    else {
-        // Змінюємо стиль кнопки при іншому стані прапорця стилю
-        setButtonStyle(button, Color.WHITE, Color.BLACK, "Чувак, ти не серйозний");
-
-        styleFlag = !styleFlag;  // Змінюємо значення прапорця стилю
-        exitFlag = !exitFlag;    // Змінюємо значення прапорця виходу
-    }
-}
-```
-
-Крок 3.4: Функція `setButtonStylae(Button, int, int, string)` та `showToast(String, int)`
-```java
-private void setButtonStyle(Button btn, int backgroundColor, int textColor, String buttonText) {
-    btn.setBackgroundColor(backgroundColor); // Встановлюємо колір фону кнопки
-    btn.setTextColor(textColor); // Встановлюємо колір тексту кнопки
-    btn.setText(buttonText); // Встановлюємо текст кнопки
-}
-```
-```java
-private void showToast(String message, int duration) {
-    Toast.makeText(this, message, duration).show(); // Створюємо і відображаємо повідомлення Toast з вказаним текстом і тривалістю
-}
-```
 
 ### Крок 4: Робочий додаток
 Додаток працює як очікувано, змінюючи стиль кнопки та виводячи повідомлення при кожному натисканні.
