@@ -24,10 +24,48 @@ private void handleButtonClick(){
     }
 }
 ```
+Додаю метод ```onStart()```
+```java
+@Override
+protected void onStart() {
+    super.onStart();
 
-<p>
-  <img src="screenshots/3.png" width="1000px">
-</p>
+    hackWriter = findViewById(R.id.hackWriter);
+    int randomIndex = (int) (Math.random() * joke.length);
+
+    hackWriter.setText(joke[randomIndex]);
+
+    button.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            handleButtonClick();
+        }
+    });
+}
+```
+Додаю метод ```onPause()```
+```java
+@Override
+protected void onPause() {
+    super.onPause();
+    showToast("Shut me down!", Toast.LENGTH_SHORT);
+}
+```
+
+Додаю метод ```onRestart()```
+```java
+@Override
+protected void onRestart() {
+    super.onRestart();
+    if (clickCounter > 0) {
+        setButtonStyle(button, Color.BLACK, Color.WHITE, "Why did you come back?");
+        hackWriter.setVisibility(View.GONE);
+        clickCounter = 0;
+    }
+}
+```
+
+
 
 ### Крок 3: Написання коду
 Крок 3.1: Створення змінних
